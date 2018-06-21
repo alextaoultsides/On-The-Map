@@ -12,17 +12,17 @@ Open On The Map in xcode 9.0 or higher and Run the app
 https://www.udacity.com
 
 ### Enter login information for your Udacity account
-![login](https://github.com/alextaoultsides/On-The-Map/blob/master/login.png?raw=true)
+<img src= "https://github.com/alextaoultsides/On-The-Map/blob/master/login.png" width="300" />
 
 ### Press plus symbol in top right to go to add location screen
-![login](https://github.com/alextaoultsides/On-The-Map/blob/master/add.png?raw=true)
+<img src= "https://github.com/alextaoultsides/On-The-Map/blob/master/add.png" width="300" />
 
 ### Press Finish button to add pin
-![login](https://github.com/alextaoultsides/On-The-Map/blob/master/confirm.png?raw=true)
+<img src= "https://github.com/alextaoultsides/On-The-Map/blob/master/confirm.png" width="300" />
 
 ### View last 100 posted student locations
-![login](https://github.com/alextaoultsides/On-The-Map/blob/master/map.png?raw=true)
-![login](https://github.com/alextaoultsides/On-The-Map/blob/master/table.png?raw=true)
+<img src= "https://github.com/alextaoultsides/On-The-Map/blob/master/map.png" width="300" />
+<img src= "https://github.com/alextaoultsides/On-The-Map/blob/master/table.png" width="300" />
 
 
 
