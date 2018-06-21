@@ -11,13 +11,13 @@ Open On The Map in xcode 9.0 or higher and Run the app
 ### Must have a Udacity account to use.
 https://www.udacity.com
 
-Enter login information for your Udacity account
+### Enter login information for your Udacity account
 ![login](https://github.com/alextaoultsides/On-The-Map/blob/master/login.png?raw=true)
 
 ### Press plus symbol in top right to go to add location screen
 ![login](https://github.com/alextaoultsides/On-The-Map/blob/master/add.png?raw=true)
 
-### Press confirm location button to add pin
+### Press Finish button to add pin
 ![login](https://github.com/alextaoultsides/On-The-Map/blob/master/confirm.png?raw=true)
 
 ### View last 100 posted student locations
