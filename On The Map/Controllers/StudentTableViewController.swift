@@ -1,5 +1,5 @@
 //
-//  TableViewController.swift
+//  StudentTableViewController.swift
 //  On The Map
 //
 //  Created by atao1 on 3/28/18.
@@ -8,11 +8,11 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
-class TableViewController: UIViewController{
+class StudentTableViewController: UIViewController{
     
-    var addedValues: [String:String] = [:]
-    var optionalValues: [String:String] = [:]
+    var addedValues: [(String,String)] = []
     
     var students: [StudentInformation] = [StudentInformation]()
     
@@ -20,65 +20,64 @@ class TableViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //taskForGetStudentsMethod()
+        
     }
-    /*
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         taskForGetStudentsMethod()
-        print()
-        
-    }*/
+    }
     
+    //MARK: Load students to table
     func taskForGetStudentsMethod(){
-        
-        let method = OTMClient.Constants.ParseMethods.parseGetMethod + "?limit=100&order=-updatedAt"
-        addedValues[OTMClient.Constants.ParseKeys.ApiKey] = OTMClient.Constants.ParseHTTPHeaderFieldKeys.ApiKey
-        addedValues[OTMClient.Constants.ParseKeys.AppID] = OTMClient.Constants.ParseHTTPHeaderFieldKeys.AppID
-        
-        OTMClient.sharedInstance().parseBuilder(method: method,addValues: addedValues,currentViewController: self) { (results, error) in
-            
-            self.students = StudentInformation.studentsFromResults((results!["results"] as? [[String : AnyObject]])!)
-            //print(self.students)
+        OTMClient.sharedInstance().taskForGetStudents() {(error) in
+            if let error = error{
+                self.displayError(error.localizedDescription)
+            }
+            self.students = StudentData.sharedInstance().studentDict
             performUIUpdatesOnMain {
-                    
-               self.studentTableView!.reloadData()
-                    
+                self.studentTableView.reloadData()
             }
         }
     }
 }
-    extension TableViewController: UITableViewDelegate, UITableViewDataSource {
+
+//MARK: student table view delegate
+extension StudentTableViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            
-            let cellReuseIdentifier = "StudentTableViewCell"
-            let student = students[(indexPath as NSIndexPath).row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
-            print(student.firstName!)
-            
-            //cell?.textLabel!.text = "\(student.firstName) \(student.lastName)"
-            cell!.textLabel!.text = "hello"
-            //cell?.detailTextLabel!.text = student.mediaURL
-            
-            //cell?.imageView!.contentMode = UIViewContentMode.scaleAspectFit
-           
-            return cell!
-        }
+        let cellReuseIdentifier = "StudentCell"
+        let student = students[(indexPath as NSIndexPath).row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
         
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            print(students.count)
-            return 50
+        cell?.textLabel!.text = "\(String(describing: student.firstName!)) \(String(describing: student.lastName!))"
+        if let mediaURL = student.mediaURL{
+        cell?.detailTextLabel!.text = mediaURL
         }
-        /*
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let controller = storyboard!.instantiateViewController(withIdentifier: "MovieDetailViewController") as! MovieDetailViewController
-            controller.movie = movies[(indexPath as NSIndexPath).row]
-            navigationController!.pushViewController(controller, animated: true)
-        }*/
-        
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 100
-        }
+        cell?.imageView!.contentMode = UIViewContentMode.scaleAspectFit
+       
+        return cell!
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return students.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var studentURL = students[(indexPath as NSIndexPath).row].mediaURL!
+        if studentURL.lowercased().hasPrefix("http") == false{
+            studentURL = "https://".appending(studentURL)
+        }
+        let svc = SFSafariViewController(url: URL(string: studentURL)!)
+        present(svc, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    //MARK: Display error alert
+    
+}
 
