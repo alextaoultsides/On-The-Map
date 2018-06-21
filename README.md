@@ -21,9 +21,8 @@ https://www.udacity.com
 <img src= "https://github.com/alextaoultsides/On-The-Map/blob/master/confirm.png" width="300" />
 
 ### View last 100 posted student locations
-You can select pins or table cells to be brought to Website
 <img src= "https://github.com/alextaoultsides/On-The-Map/blob/master/map.png" width="300" />
 <img src= "https://github.com/alextaoultsides/On-The-Map/blob/master/table.png" width="300" />
 
-
+Selected pins or table cells will link to the students url
 
