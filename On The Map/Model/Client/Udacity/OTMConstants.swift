@@ -23,8 +23,8 @@ extension OTMClient {
             static let parsePostMethod = "https://parse.udacity.com/parse/classes/StudentLocation"
         }
         struct ParseKeys{
-            static let AppID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
-            static let ApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+            static let AppID = "your ID"
+            static let ApiKey = "your API"
             static let jsonMethod = "application/json"
         }
         struct ParseHTTPHeaderFieldKeys{
